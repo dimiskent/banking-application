@@ -1,4 +1,5 @@
 public class CheckingAccount extends BankAccount {
+    private final double overdraft = 200;
     public CheckingAccount(double amount) {
         super(amount);
     }
@@ -8,6 +9,10 @@ public class CheckingAccount extends BankAccount {
         return super.getBalance();
     }
     public void withdraw(double amount) {
+        if(amount > (overdraft + getBalance())) {
+            System.out.println("Cannot withdraw more than the balance & overdraft!");
+            return;
+        }
         System.out.printf("Withdrawing %.2f from Checking Account\n", amount);
         super.withdraw(amount);
     }
